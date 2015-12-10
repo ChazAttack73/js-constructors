@@ -154,3 +154,5 @@ Spellcaster.prototype.invoke = function ( spellCast, target ) {
     } return false;
   }
 };
+
+console.log();
