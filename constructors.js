@@ -147,12 +147,20 @@ Spellcaster.prototype.spendMana = function( spellCost ) {
    */
 
 Spellcaster.prototype.invoke = function ( spellCast, target ) {
-  if( spellCast instanceof Spell || spellCast instanceof  DamageSpell) {
-    if (this.mana >= spellCast.cost) {
-      this.spendMana( spellCast.cost );
-      return true;
-    } return false;
+  if ( spellCast instanceof Spell ) {
+    if ( this.mana >= spellCast.cost ) {
+      if (spellCast instanceof DamageSpell ) {
+        if (target instanceof Spellcaster ){
+          target.inflictDamage ( spellCast.damage );
+        } else {
+          return false;
+        }
+      }
+      return this.spendMana ( spellCast.cost );
+    } else {
+      return false;
+    }
+  } else {
+    return false;
   }
 };
-
-console.log();
